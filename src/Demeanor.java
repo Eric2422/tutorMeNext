@@ -27,4 +27,10 @@ public class Demeanor {
             demeanor = DemeanorType.UNDEFINED;
         }
     } 
+
+    public DemeanorType getDemeanor() {
+        return demeanor;
+    }
+
+    public void  setDemeanor()
 }
