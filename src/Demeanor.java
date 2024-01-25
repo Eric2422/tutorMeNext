@@ -44,5 +44,11 @@ public class Demeanor {
             // set it to the default(i.e. UNDEFINED)
             demeanor = DemeanorType.UNDEFINED;
         }
+    } 
+
+    public DemeanorType getDemeanor() {
+        return demeanor;
     }
+
+    public void  setDemeanor()
 }
