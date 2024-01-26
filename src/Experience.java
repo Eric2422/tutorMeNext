@@ -5,9 +5,7 @@ public class Experience {
         EXPERIENCED;
     }
 
-    
-
-    public class Experience() {
+    public Experience() {
 
     }
 }
