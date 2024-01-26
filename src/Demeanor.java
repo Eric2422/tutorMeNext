@@ -12,8 +12,13 @@ public class Demeanor {
         demeanor = DemeanorType.UNDEFINED;
     }
 
+    public Demeanor(DemeanorType demeanor) {
+        this.demeanor = demeanor;
+    }
+
     /**
-     * Converts a String holding demeanor to a DemeanorType
+     * Take in a String and save the corresponding DemeanorType
+     * Defaults to UNDEFINED
      * 
      * @param demeanorStr a String that holds the demeanor
      */
@@ -30,8 +35,8 @@ public class Demeanor {
     }
 
     /**
-     * Tries to convert the String to a valid DemeanorType enum
-     * If it fails, defaults to undefined
+     * Tries to convert a String to a valid DemeanorType enum
+     * If it fails, defaults to UNDEFINED
      * 
      * @param demeanorStr a String that holds the demeanor
      */
@@ -45,10 +50,4 @@ public class Demeanor {
             demeanor = DemeanorType.UNDEFINED;
         }
     } 
-
-    public DemeanorType getDemeanor() {
-        return demeanor;
-    }
-
-    public void  setDemeanor()
 }
