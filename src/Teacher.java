@@ -1,7 +1,7 @@
 public class Teacher { 
     private String name;
     private Experience experience;
-    private
+    private 
 
     public Teacher() {
 
