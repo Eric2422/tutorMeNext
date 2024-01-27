@@ -1,6 +1,6 @@
 public class Time {
-    private short hour;
-    private short minute;
+    private int hour;
+    private int minute;
 
     /**
      * @param startHour   int of the hour that time starts at
@@ -9,5 +9,13 @@ public class Time {
     public Time(int startHour, int startMinute) {
         hour = startHour;
         minute = startMinute;
+    }
+
+    /**
+     * Adjusts for number of minutes beyond 60
+     */
+    private convertMinutesToHours() {
+        hour += minute / 60;
+        minute % 
     }
 }
