@@ -29,7 +29,7 @@ public class Demeanor {
         return demeanor;
     }
 
-    public void setDemeanor(DemeanorType demeanor) {
+    private void setDemeanor(DemeanorType demeanor) {
         this.demeanor = demeanor;
     }
 
@@ -39,7 +39,7 @@ public class Demeanor {
      * 
      * @param demeanorStr a String that holds the demeanor
      */
-    public void setDemeanor(String demeanorStr) {
+    private void setDemeanor(String demeanorStr) {
         // try to convert the String to the matching DemeanorType and store it
         try {
             demeanor = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());

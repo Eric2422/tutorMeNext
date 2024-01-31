@@ -11,7 +11,11 @@ public class Experience {
         this.experience = ExperienceLevel.FIRST_YEAR;
     }
 
-    public void setExperience(ExperienceLevel experience) {
+    public ExperienceLevel getExperience() {
+        return experience;
+    }
+
+    private void setExperience(ExperienceLevel experience) {
         this.experience = experience;
     }
 
@@ -21,7 +25,7 @@ public class Experience {
      * 
      * @param experienceStr a String that holds the experience level
      */
-    public void setExperience(String experienceStr) {
+    private void setExperience(String experienceStr) {
         // try to convert the String to the matching ExperienceLevel and store it
         try {
             experience = ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
@@ -30,9 +34,5 @@ public class Experience {
             // set it to the default(i.e. FIRST_YEAR)
             experience = ExperienceLevel.FIRST_YEAR;
         }
-    }
-
-    public ExperienceLevel getExperience() {
-        return experience;
     }
 }

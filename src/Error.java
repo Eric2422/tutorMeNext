@@ -7,6 +7,8 @@ public class Error {
     }
 
     private ErrorType error;
+    private int minutesToFixWithoutHelp;
+    private int minutesToFixWithHelp;
 
     public Error() {
         error = ErrorType.UNDEFINED;
@@ -31,7 +33,7 @@ public class Error {
         return error;
     }
 
-    public void setError(ErrorType error) {
+    private void setError(ErrorType error) {
         this.error = error;
     }
 
@@ -41,7 +43,7 @@ public class Error {
      * 
      * @param errorStr a String that holds the demeanor
      */
-    public void setError(String errorStr) {
+    private void setError(String errorStr) {
         // try to convert the String to the matching ErrorType and store it
         try {
             error = ErrorType.valueOf(errorStr.trim().toUpperCase());

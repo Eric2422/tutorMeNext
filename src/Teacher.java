@@ -1,4 +1,5 @@
 import java.util.Stack;
+import java.util.Queue;
 
 public class Teacher { 
     private String name;
@@ -8,8 +9,8 @@ public class Teacher {
     // Is null when the teacher is not helping anyone
     private HelpRequest currentRequest;
 
-    private requestsStack Stack<HelpRequest>;
-    private requestsQueue 
+    private Stack<HelpRequest> requestsStack;
+    private Queue<HelpRequest> requestsQueue;
 
     public Teacher(String name, Experience experience) {
         this.name = name;
