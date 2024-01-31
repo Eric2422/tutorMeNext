@@ -5,7 +5,6 @@ public class Demeanor {
         UNDEFINED;
     }
 
-    // holds the demeanor
     private DemeanorType demeanor;    
 
     public Demeanor() {

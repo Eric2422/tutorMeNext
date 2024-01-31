@@ -36,7 +36,7 @@ public class Error {
     }
 
     /**
-     * Tries to convert a String to a valid ErrorStr enum
+     * Tries to convert a String to a valid Errortype enum
      * If it fails, defaults to UNDEFINED
      * 
      * @param errorStr a String that holds the demeanor
