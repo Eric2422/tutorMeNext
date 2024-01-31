@@ -31,4 +31,8 @@ public class Experience {
             experience = ExperienceLevel.FIRST_YEAR;
         }
     }
+
+    public ExperienceLevel getExperience() {
+        return experience;
+    }
 }

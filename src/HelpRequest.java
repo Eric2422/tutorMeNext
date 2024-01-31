@@ -1,11 +1,12 @@
 public class HelpRequest { 
-    private String name;
+    private Student student;
     private Error error;
-    private Demeanor demeanor;
 
-    public HelpRequest(String name, Error error, Demeanor demeanor) {
-        this.name = name;
+    // the time that the request was made
+    private Time timeStamp;
+
+    public HelpRequest(Student student, Error error, Time timeStamp) {
+        this.student = student;
         this.error = error;
-        this.demeanor = demeanor;
     }
 }
