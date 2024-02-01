@@ -21,6 +21,5 @@ public class Teacher {
      * The teacher accepts requests from the stack or the queue
      */
     public static void acceptRequests() {
-
     }
 }
