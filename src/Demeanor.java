@@ -3,6 +3,23 @@ public class Demeanor {
         POLITE,
         RUDE,
         UNDEFINED;
+
+        /**
+         * Attempts to convert a String to an DemeanorType
+         * If it it does not match any DemeanorType, default to UNDEFINED
+         * 
+         * @param demeanorStr a String that contains an DemeanorType
+         */
+        private static DemeanorType toDemeanorType(String demeanorStr) {
+            // try to convert the String to the matching DemeanorType and store it
+            try {
+                return DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
+
+            } catch (IllegalArgumentException | NullPointerException e) { // if it fails
+                // set it to the default(i.e. UNDEFINED)
+                return DemeanorType.UNDEFINED;
+            }
+        }
     }
 
     private DemeanorType demeanor;    
@@ -22,31 +39,10 @@ public class Demeanor {
      * @param demeanorStr a String that holds the demeanor
      */
     public Demeanor(String demeanorStr) {
-        setDemeanor(demeanorStr);
+        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
     } 
 
     public DemeanorType getDemeanor() {
         return demeanor;
     }
-
-    private void setDemeanor(DemeanorType demeanor) {
-        this.demeanor = demeanor;
-    }
-
-    /**
-     * Tries to convert a String to a valid DemeanorType enum
-     * If it fails, defaults to UNDEFINED
-     * 
-     * @param demeanorStr a String that holds the demeanor
-     */
-    private void setDemeanor(String demeanorStr) {
-        // try to convert the String to the matching DemeanorType and store it
-        try {
-            demeanor = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
-
-        } catch (IllegalArgumentException | NullPointerException e) { // if it fails
-            // set it to the default(i.e. UNDEFINED)
-            demeanor = DemeanorType.UNDEFINED;
-        }
-    } 
 }

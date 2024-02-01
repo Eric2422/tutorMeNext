@@ -14,11 +14,11 @@ public class Error {
         private static ErrorType toErrorType(String errorStr) {
             // try to convert the String to the matching ErrorType and store it
             try {
-                error = ErrorType.valueOf(errorStr.trim().toUpperCase());
+                return ErrorType.valueOf(errorStr.trim().toUpperCase());
 
             } catch (IllegalArgumentException | NullPointerException e) { // if it fails
                 // set it to the default(i.e. UNDEFINED)
-                error = ErrorType.UNDEFINED;
+                return ErrorType.UNDEFINED;
             }
         }
     }
@@ -38,7 +38,7 @@ public class Error {
     }
 
     public Error(ErrorType error) {
-        this(Error, 1, 1);
+        this(error, 1, 1);
     }
 
     /**
@@ -75,17 +75,11 @@ public class Error {
         return error;
     }
 
-    private void setError(ErrorType error) {
-        this.error = error;
+    public int getMinutesToFixWithHelp() {
+        return minutesToFixWithHelp;
     }
 
-    /**
-     * Tries to convert a String to a valid Errortype enum
-     * If it fails, defaults to UNDEFINED
-     * 
-     * @param errorStr a String that holds the demeanor
-     */
-    private void setError(String errorStr) {
-        this.error = ErrorType.toErrorType(errorStr);
+    public int getMinutesToFixWithoutHelp() {
+        return minutesToFixWithoutHelp;
     }
 }

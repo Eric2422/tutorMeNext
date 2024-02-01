@@ -3,6 +3,23 @@ public class Experience {
         FIRST_YEAR,
         INTERMEDIATE,
         EXPERIENCED;
+
+        /**
+         * Attempts to convert a String to an ExperienceLevel
+         * If it it does not match any ExperienceLevel, default to FIRST_YEAR
+         * 
+         * @param experienceStr a String that contains an ExperienceLevel
+         */
+        private static ExperienceLevel toExperienceLevel(String experienceStr) {
+            // try to convert the String to the matching ExperienceLevel and store it
+            try {
+                return ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
+
+            } catch (IllegalArgumentException | NullPointerException e) { // if it fails
+                // set it to the default(i.e. UNDEFINED)
+                return ExperienceLevel.FIRST_YEAR;
+            }
+        }
     }
 
     private ExperienceLevel experience;
@@ -11,28 +28,15 @@ public class Experience {
         this.experience = ExperienceLevel.FIRST_YEAR;
     }
 
-    public ExperienceLevel getExperience() {
-        return experience;
+    public Experience(String experienceStr) {
+        experience = ExperienceLevel.toExperienceLevel(experienceStr);
     }
 
-    private void setExperience(ExperienceLevel experience) {
+    public Experience(ExperienceLevel experience) {
         this.experience = experience;
     }
 
-    /**
-     * Tries to convert a String to a valid ExperienceLevel enum
-     * If it fails, defaults to FIRST_YEAR
-     * 
-     * @param experienceStr a String that holds the experience level
-     */
-    private void setExperience(String experienceStr) {
-        // try to convert the String to the matching ExperienceLevel and store it
-        try {
-            experience = ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
-
-        } catch (IllegalArgumentException | NullPointerException e) { // if it fails
-            // set it to the default(i.e. FIRST_YEAR)
-            experience = ExperienceLevel.FIRST_YEAR;
-        }
+    public ExperienceLevel getExperience() {
+        return experience;
     }
 }

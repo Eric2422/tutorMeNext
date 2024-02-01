@@ -7,6 +7,11 @@ public class Student {
         this.demeanor = demeanor;
     }
 
+    public Student(String name, String demeanorStr) {
+        this.name = name;
+        this.demeanor = new Demeanor(demeanorStr);
+    }
+
     public String getName() {
         return name;
     }
