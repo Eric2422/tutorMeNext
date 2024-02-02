@@ -11,18 +11,20 @@ public class Demeanor {
          * @param demeanorStr a String that contains an DemeanorType
          */
         private static DemeanorType toDemeanorType(String demeanorStr) {
-            // try to convert the String to the matching DemeanorType and store it
-            try {
-                return DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
+            // convert the String to the matching DemeanorType and store it
+            DemeanorType demeanor = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
 
-            } catch (IllegalArgumentException | NullPointerException e) { // if it fails
-                // set it to the default(i.e. UNDEFINED)
-                return DemeanorType.UNDEFINED;
+            // if the String passed in is "undefined"
+            // throw an error
+            if (demeanor == DemeanorType.UNDEFINED) {
+                throw new IllegalArgumentException("\n""demeanorStr + "\n" is not a valid demeanor.");
             }
+
+            return demeanor;
         }
     }
 
-    private DemeanorType demeanor;    
+    private DemeanorType demeanor = DemeanorType.UNDEFINED; 
 
     public Demeanor() {
         demeanor = DemeanorType.UNDEFINED;
@@ -40,7 +42,7 @@ public class Demeanor {
      */
     public Demeanor(String demeanorStr) {
         this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
-    } 
+    }
 
     public DemeanorType getDemeanor() {
         return demeanor;

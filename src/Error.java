@@ -12,18 +12,16 @@ public class Error {
          * @param errorStr a String that contains an ErrorType
          */
         private static ErrorType toErrorType(String errorStr) {
-            // try to convert the String to the matching ErrorType and store it
-            try {
-                return ErrorType.valueOf(errorStr.trim().toUpperCase());
+            // convert the String to the matching ErrorType and store it
+            return ErrorType.valueOf(errorStr.trim().toUpperCase());
 
-            } catch (IllegalArgumentException | NullPointerException e) { // if it fails
-                // set it to the default(i.e. UNDEFINED)
-                return ErrorType.UNDEFINED;
+            // set it to the default(i.e. UNDEFINED)
+            return ErrorType.UNDEFINED;
             }
         }
     }
 
-    private ErrorType error;
+    private ErrorType error = ErrorType.UNDEFINED;
 
     // how many minutes it takes for the student to fix the error
     // if they receive help from the teacher
