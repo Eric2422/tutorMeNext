@@ -2,7 +2,8 @@ public class Experience {
     public enum ExperienceLevel {
         FIRST_YEAR,
         INTERMEDIATE,
-        EXPERIENCED;
+        EXPERIENCED,
+        UNDEFINED;
 
         /**
          * Attempts to convert a String to an ExperienceLevel
@@ -11,14 +12,15 @@ public class Experience {
          * @param experienceStr a String that contains an ExperienceLevel
          */
         private static ExperienceLevel toExperienceLevel(String experienceStr) {
-            // try to convert the String to the matching ExperienceLevel and store it
-            try {
-                return ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
+            // convert the String to the matching ExperienceLevel and store it
+            ExperienceLevel experience =  ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
 
-            } catch (IllegalArgumentException | NullPointerException e) { // if it fails
-                // set it to the default(i.e. UNDEFINED)
-                return ExperienceLevel.FIRST_YEAR;
+            // Can not be set to undefined
+            if (experience == ExperienceLevel.UNDEFINED) {
+                throw new IllegalArgumentException("\""  + experienceStr + "\" is not a valid demeanor.");
             }
+
+            return experience;
         }
     }
 

@@ -13,13 +13,17 @@ public class Error {
          */
         private static ErrorType toErrorType(String errorStr) {
             // convert the String to the matching ErrorType and store it
-            return ErrorType.valueOf(errorStr.trim().toUpperCase());
+            ErrorType error = ErrorType.valueOf(errorStr.trim().toUpperCase());
 
-            // set it to the default(i.e. UNDEFINED)
-            return ErrorType.UNDEFINED;
+            // Can not be set to UNDEFINED
+            if (error == ErrorType.UNDEFINED) {
+                throw new IllegalArgumentException("\"" + errorStr + "\" is not a valid demeanor.");
             }
+
+            return error;
         }
     }
+    
 
     private ErrorType error = ErrorType.UNDEFINED;
 

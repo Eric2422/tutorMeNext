@@ -14,10 +14,9 @@ public class Demeanor {
             // convert the String to the matching DemeanorType and store it
             DemeanorType demeanor = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
 
-            // if the String passed in is "undefined"
-            // throw an error
+            // Can not be set to undefined
             if (demeanor == DemeanorType.UNDEFINED) {
-                throw new IllegalArgumentException("\n""demeanorStr + "\n" is not a valid demeanor.");
+                throw new IllegalArgumentException("\"" + demeanorStr + "\" is not a valid demeanor.");
             }
 
             return demeanor;
