@@ -17,7 +17,7 @@ public class Experience {
 
             // Can not be set to undefined
             if (experience == ExperienceLevel.UNDEFINED) {
-                throw new IllegalArgumentException("\""  + experienceStr + "\" is not a valid demeanor.");
+                throw new IllegalArgumentException("\""  + experienceStr + "\" is not a valid experience.");
             }
 
             return experience;
@@ -40,5 +40,18 @@ public class Experience {
 
     public ExperienceLevel getExperience() {
         return experience;
+    }
+
+    public void setExperience(ExperienceLevel experience) {
+        this.experience = experience;
+    }
+
+    public void setExperience(String experienceStr) {
+        this.experience = ExperienceLevel.toExperienceLevel(experienceStr);
+    }
+
+    @Override
+    public String toString() {
+        return experience.toString();
     }
 }

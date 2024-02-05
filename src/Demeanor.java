@@ -46,4 +46,17 @@ public class Demeanor {
     public DemeanorType getDemeanor() {
         return demeanor;
     }
+
+    public void setDemeanor(DemeanorType demeanor) {
+        this.demeanor = demeanor;
+    }
+
+    public void setDemeanor(String demeanorStr) {
+        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
+    }
+
+    @Override
+    public String toString() {
+        return demeanor.toString();
+    }
 }

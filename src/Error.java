@@ -77,11 +77,24 @@ public class Error {
         return error;
     }
 
+    public void setError(ErrorType error) {
+        this.error = error;
+    }
+
+    public void setError(String errorStr) {
+        this.error = ErrorType.toErrorType(errorStr);
+    }
+
     public int getMinutesToFixWithHelp() {
         return minutesToFixWithHelp;
     }
 
     public int getMinutesToFixWithoutHelp() {
         return minutesToFixWithoutHelp;
+    }
+
+    @Override
+    public String toString() {
+        return error.toString();
     }
 }
