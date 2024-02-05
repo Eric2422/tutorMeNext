@@ -17,7 +17,7 @@ public class Error {
 
             // Can not be set to UNDEFINED
             if (error == ErrorType.UNDEFINED) {
-                throw new IllegalArgumentException("\"" + errorStr + "\" is not a valid demeanor.");
+                throw new IllegalArgumentException("\"" + errorStr + "\" is not a valid error.");
             }
 
             return error;
