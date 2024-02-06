@@ -11,7 +11,12 @@ public class Main {
         Scanner input = new Scanner(System.in);
 
         while (true) {
+            System.out.print("Enter a time: ");
+            String timeStr = input.nextLine();
 
+
+            System.out.println("timeStr is a time: " + Time.parse(timeStr));
+            System.out.println();
         }
     }
 }

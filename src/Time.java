@@ -1,31 +1,70 @@
-import java.time.LocalTime;
+import java.time.*;
 
-public class Time {
+public class Time extends Comparable {
     private LocalTime currentTime;
 
+    public Time() {
+        this(0, 0);
+    }
+
+    public Time(int hour, int minute) {
+        currentTime = LocalTime.of(hour, minute);
+    }
+
     /**
-     * @param startHour   int of the hour that time starts at
-     * @param startMinute int of the minute that time starts at
+     * Attmepts to set the time based on a given String
+     * If it fails, default to 0:00
      */
-    public Time(int startHour, int startMinute) {
-        currentTime = LocalTime.of(startHour, startMinute);
+    public Time(String timeStr) {
+        LocalTime time = parse(timeStr);
+        currentTime = (time != null) ? time : LocalTime.of(0, 0);
+    }
+
+    public Time(Time time) {
+        this.currentTime = time.currentTime;
     }
 
     public LocalTime getCurrentTime() {
         return currentTime;
     }
 
+    public void setCurrentTime(int hour, int minute) {
+        currentTime = LocalTime.of(hour, minute);
+    }
+
+    public void setCurrentTime(LocalTime time) {
+        currentTime = time;
+    }
+
+    public void setCurrentTime(Time time) {
+        currentTime = time.currrentTime;
+    }
+
     /**
-     * Checks to see if the String can be converted to a time by using regex
+     * Convert a String into a Time based on a 24-hour format.
+     * Hours and minutes should be separated by a colon(:).
+     * Does not accept seconds.
+     * Returns null if it is not possible to convert the String
      * 
-     * @param 
+     * @param  timeStr a String that contains a time in 24-hour format
+     * @return a LocalTime object representing the given time
      */
-    public static boolean isValidTimeStr(String timeStr) {
-        return timeStamp.match("\\d?[0-4]:\\d\\d");
+    public static LocalTime parse(String timeStr) {
+        try {
+            java.time.format.DateTimeFormatter timeFormat = java.time.format.DateTimeFormatter.ofPattern("H':'m");
+            return LocalTime.parse(timeStr, timeFormat);
+
+
+        } catch (java.time.format.DateTimeParseException e) { // if the given String is not a valid time
+            return null;
+        }
     }
 
     @Override
     public String toString() {
         return currentTime.toString();
     }
+
+    @Override
+    public 
 }

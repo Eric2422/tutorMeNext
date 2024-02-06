@@ -8,5 +8,6 @@ public class HelpRequest {
     public HelpRequest(Student student, Error error, Time timeStamp) {
         this.student = student;
         this.error = error;
+        this.timeStamp = timeStamp;
     }
 }
