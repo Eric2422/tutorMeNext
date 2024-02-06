@@ -1,6 +1,6 @@
 import java.time.*;
 
-public class Time extends Comparable {
+public class Time implements Comparable {
     private LocalTime currentTime;
 
     public Time() {
@@ -37,7 +37,7 @@ public class Time extends Comparable {
     }
 
     public void setCurrentTime(Time time) {
-        currentTime = time.currrentTime;
+        currentTime = time.currentTime;
     }
 
     /**
@@ -66,5 +66,14 @@ public class Time extends Comparable {
     }
 
     @Override
-    public 
+    public boolean equals(Object obj) {
+        if (obj instanceof Time) {
+            Time time = (Time) obj;
+            return currentTime == time.currentTime;
+        }
+
+        return false;
+    }
+
+    @Overridew
 }
