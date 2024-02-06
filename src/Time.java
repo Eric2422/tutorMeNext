@@ -15,6 +15,15 @@ public class Time {
         return currentTime;
     }
 
+    /**
+     * Checks to see if the String can be converted to a time by using regex
+     * 
+     * @param 
+     */
+    public static boolean isValidTimeStr(String timeStr) {
+        return timeStamp.match("\\d?[0-4]:\\d\\d");
+    }
+
     @Override
     public String toString() {
         return currentTime.toString();
