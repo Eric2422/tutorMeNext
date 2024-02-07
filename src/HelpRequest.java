@@ -5,6 +5,12 @@ public class HelpRequest {
     // the time that the request was made
     private Time timeStamp;
 
+    public HelpRequest() {
+        this.student = new Student();
+        this.error = new Error();
+        this.timeStamp = new Time();
+    }
+
     public HelpRequest(Student student, Error error, Time timeStamp) {
         this.student = student;
         this.error = error;
@@ -15,11 +21,15 @@ public class HelpRequest {
         return student;
     }
 
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
     public Error getError() { 
         return error;
     }
 
     public Time getTimeStamp() {
         return timeStamp;
-    
+    }
 }

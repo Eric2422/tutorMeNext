@@ -27,23 +27,27 @@ public class Experience {
     private ExperienceLevel experience;
 
     public Experience() {
-        this.experience = ExperienceLevel.FIRST_YEAR;
+        setExperience(ExperienceLevel.UNDEFINED);
     }
 
     public Experience(String experienceStr) {
-        experience = ExperienceLevel.toExperienceLevel(experienceStr);
+        setExperience(experienceStr);
     }
 
-    public Experience(ExperienceLevel experience) {
-        this.experience = experience;
+    public Experience(ExperienceLevel experienceLevel) {
+        setExperience(experienceLevel);
     }
 
     public ExperienceLevel getExperience() {
         return experience;
     }
 
-    public void setExperience(ExperienceLevel experience) {
-        this.experience = experience;
+    public void setExperience(ExperienceLevel experienceLevel) {
+        this.experience = experienceLevel;
+    }
+
+    public void setExperience(Experience experience) {
+        this.experience = experience.experience;
     }
 
     public void setExperience(String experienceStr) {

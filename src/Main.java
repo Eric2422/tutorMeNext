@@ -3,9 +3,6 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Time time1 = new Time(3, 15);
-        Time time2 = new Time(3, 00);
-
-        System.out.println(time1.compareTo(time2));
+        Student[] studentArr = {new Student(), new Student(), new Student()};
     }
 }
