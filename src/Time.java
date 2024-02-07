@@ -83,6 +83,8 @@ public class Time implements Comparable {
 
         Time time = (Time) obj;
 
+        // until() returns the amount of time from this LocalTime to another LocalTime,
+        // so the value returned by until() has to be negated to return thisTime - otherTime
         return (int) -this.currentTime.until(time.currentTime, java.time.temporal.ChronoUnit.MINUTES);
     }
 }

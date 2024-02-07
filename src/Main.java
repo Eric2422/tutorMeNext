@@ -3,20 +3,9 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Teacher teacher = new Teacher("The Teacher", new Experience("FIRST_YEAR"));
-        // System.out.println(teacher);
+        Time time1 = new Time(3, 15);
+        Time time2 = new Time(3, 00);
 
-        // Error error = new Error("compiling", 3, 15);
-        // Student student = new Student("Eric Zhang", "POLITE");
-        Scanner input = new Scanner(System.in);
-
-        while (true) {
-            System.out.print("Enter a time: ");
-            String timeStr = input.nextLine();
-
-
-            System.out.println("timeStr is a time: " + Time.parse(timeStr));
-            System.out.println();
-        }
+        System.out.println(time1.compareTo(time2));
     }
 }
