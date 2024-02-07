@@ -10,4 +10,16 @@ public class HelpRequest {
         this.error = error;
         this.timeStamp = timeStamp;
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Error getError() { 
+        return error;
+    }
+
+    public Time getTimeStamp() {
+        return timeStamp;
+    
 }

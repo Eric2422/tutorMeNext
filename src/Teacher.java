@@ -12,9 +12,17 @@ public class Teacher {
     private Stack<HelpRequest> requestsStack;
     private Queue<HelpRequest> requestsQueue;
 
+    public Teacher() {
+
+    }
+
     public Teacher(String name, Experience experience) {
         this.name = name;
         this.experience = experience;
+    }
+
+    public String getName() {
+        return name;
     }
 
     /**
