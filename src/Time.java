@@ -75,5 +75,14 @@ public class Time implements Comparable {
         return false;
     }
 
-    @Overridew
+    @Override
+    public int compareTo(Object obj) {
+        if (!(obj instanceof Time)) {
+            throw new IllegalArgumentException("Time object can only be compared to another Time object.");
+        }
+
+        Time time = (Time) obj;
+
+        return (int) -this.currentTime.until(time.currentTime, java.time.temporal.ChronoUnit.MINUTES);
+    }
 }
