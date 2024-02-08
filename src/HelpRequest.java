@@ -29,7 +29,27 @@ public class HelpRequest {
         return error;
     }
 
+    public void setError(Error error) {
+        this.error = error;
+    }
+
+    public void setError(Error.ErrorType error) {
+        this.error = new Error(error);
+    }
+
+    public void setError(String errorStr) {
+        this.error = new Error(errorStr);
+    }
+
     public Time getTimeStamp() {
         return timeStamp;
+    }
+
+    public void setTimeStamp(int hour, int minute) {
+        this.timeStamp = new Time(hour, minute);
+    }
+
+    public void setTimeStamp(Time time) {
+        this.timeStamp = time.timeStamp;
     }
 }
