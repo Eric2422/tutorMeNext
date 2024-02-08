@@ -1,3 +1,5 @@
+import java.time.LocalTime;
+
 public class HelpRequest { 
     private Student student;
     private Error error;
@@ -25,6 +27,14 @@ public class HelpRequest {
         this.student = student;
     }
 
+    public void setStudent(String name, Demeanor demeanor) {
+        student = new Student(name, demeanor);
+    }
+
+    public void setStudent(String name, Demeanor.DemeanorType demeanorType) {
+        student = new Student(name, demeanorType);
+    }
+
     public Error getError() { 
         return error;
     }
@@ -49,7 +59,11 @@ public class HelpRequest {
         this.timeStamp = new Time(hour, minute);
     }
 
+    public void setTimeStamp(LocalTime localTime) {
+        this.timeStamp = new Time(localTime);
+    }
+
     public void setTimeStamp(Time time) {
-        this.timeStamp = time.timeStamp;
+        this.timeStamp = time;
     }
 }

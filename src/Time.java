@@ -20,6 +20,10 @@ public class Time implements Comparable {
         currentTime = (time != null) ? time : LocalTime.of(0, 0);
     }
 
+    public Time(LocalTime localTime) {
+        currentTime = localTime;
+    }
+
     public Time(Time time) {
         this.currentTime = time.currentTime;
     }

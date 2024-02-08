@@ -16,6 +16,11 @@ public class Student {
         setDemeanor(demeanor);
     }
 
+    public Student(String name, Demeanor.DemeanorType demeanorType) {
+        setName("Student");
+        setDemeanor(demeanorType);
+    }
+
     public Student(String name, String demeanorStr) {
         this.name = name;
         setDemeanor(demeanorStr);
