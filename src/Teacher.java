@@ -13,7 +13,7 @@ public class Teacher {
     private Queue<HelpRequest> requestsQueue;
 
     public Teacher() {
-
+        
     }
 
     public Teacher(String name, Experience experience) {
