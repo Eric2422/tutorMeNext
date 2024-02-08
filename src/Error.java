@@ -23,7 +23,6 @@ public class Error {
             return error;
         }
     }
-    
 
     private ErrorType error = ErrorType.UNDEFINED;
 
@@ -77,8 +76,8 @@ public class Error {
         return error;
     }
 
-    public void setError(ErrorType error) {
-        this.error = error;
+    public void setError(ErrorType errorType) {
+        this.error = errorType;
     }
 
     public void setError(String errorStr) {
@@ -89,8 +88,16 @@ public class Error {
         return minutesToFixWithHelp;
     }
 
+    public void setMinutesToFixWithHelp(int minutes) {
+        minutesToFixWithHelp = minutes;
+    }
+
     public int getMinutesToFixWithoutHelp() {
         return minutesToFixWithoutHelp;
+    }
+
+    public void setMinutesToFixWithoutHelp(int minutes) {
+        minutesToFixWithoutHelp = minutes;
     }
 
     @Override

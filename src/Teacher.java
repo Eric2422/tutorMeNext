@@ -25,6 +25,10 @@ public class Teacher {
         return name;
     }
 
+    public Experience getExperience() {
+        return experience;
+    }
+
     /**
      * The teacher accepts requests from the stack or the queue
      */

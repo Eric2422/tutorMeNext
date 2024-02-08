@@ -8,6 +8,7 @@ public class Student {
 
     public Student() {
         setName("Student" + studentID++);
+        setDemeanor(Demeanor.DemeanorType.UNDEFINED);
     }
 
     public Student(String name, Demeanor demeanor) {
@@ -33,7 +34,11 @@ public class Student {
     }
 
     public void setDemeanor(Demeanor demeanor) {
-        this.demeanor = demeanor
+        this.demeanor = demeanor;
+    }
+
+    public void setDemeanor(Demeanor.DemeanorType demeanorType) {
+        demeanor = new Demeanor(demeanorType);
     }
 
     public void setDemeanor(String demeanorStr) {

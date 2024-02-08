@@ -26,11 +26,14 @@ public class Demeanor {
     private DemeanorType demeanor = DemeanorType.UNDEFINED; 
 
     public Demeanor() {
-        demeanor = DemeanorType.UNDEFINED;
     }
 
-    public Demeanor(DemeanorType demeanor) {
-        this.demeanor = demeanor;
+    public Demeanor(DemeanorType demeanorType) {
+        this.demeanor = demeanorType;
+    }
+
+    public Demeanor(Demeanor demeanor) {
+        this.demeanor = demeanor.demeanor;
     }
 
     /**
@@ -40,15 +43,19 @@ public class Demeanor {
      * @param demeanorStr a String that holds the demeanor
      */
     public Demeanor(String demeanorStr) {
-        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
+        setDemeanor(demeanorStr);
     }
 
     public DemeanorType getDemeanor() {
         return demeanor;
     }
 
-    public void setDemeanor(DemeanorType demeanor) {
-        this.demeanor = demeanor;
+    public void setDemeanor(DemeanorType demeanorType) {
+        this.demeanor = demeanorType;
+    }
+
+    public void setDemeanor(Demeanor demeanor) {
+        this.demeanor = demeanor.demeanor;
     }
 
     public void setDemeanor(String demeanorStr) {

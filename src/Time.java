@@ -28,6 +28,17 @@ public class Time implements Comparable {
         return currentTime;
     }
 
+    /**
+     * Increments the time by 1 minute
+     */
+    public void incrementTime() {
+        setCurrentTime(currentTime.plusMinutes(1));
+    }
+
+    public void incrementTime(int minutes) {
+        setCurrentTime(currentTime.plusMinutes(minutes));
+    }
+
     public void setCurrentTime(int hour, int minute) {
         currentTime = LocalTime.of(hour, minute);
     }
