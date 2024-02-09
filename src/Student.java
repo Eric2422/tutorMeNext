@@ -49,4 +49,9 @@ public class Student {
     public void setDemeanor(String demeanorStr) {
         this.demeanor = new Demeanor(demeanorStr);
     }
+
+    @Override
+    public String toString() {
+        return name + "\nDemeanor: " + demeanor;
+    }
 }
