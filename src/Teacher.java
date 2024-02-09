@@ -13,8 +13,8 @@ public class Teacher {
     // Is null when the teacher is not helping anyone
     private HelpRequest currentRequest;
 
-    private Stack<HelpRequest> requestsStack;
-    private Queue<HelpRequest> requestsQueue;
+    private ArrayStack<HelpRequest> requestsStack;
+    private ListQueue<HelpRequest> requestsQueue;
 
     public Teacher() {
         name = "Teacher" + teacherID++;
@@ -54,6 +54,9 @@ public class Teacher {
      * The teacher accepts requests from the stack or the queue
      */
     public static void acceptRequests() {
+    }
+
+    public static void helpCurrentStudent() {
     }
 
     @Override
