@@ -19,11 +19,17 @@ public class Teacher {
     public Teacher() {
         name = "Teacher" + teacherID++;
         experience = new Experience(Experience.ExperienceLevel.FIRST_YEAR);
+
+        requestsStack = new ArrayStack<>();
+        requestsQueue = new ListQueue<>();
     }
 
     public Teacher(String name, Experience experience) {
         this.name = name;
         this.experience = experience;
+
+        requestsStack = new ArrayStack<>();
+        requestsQueue = new ListQueue<>();
     }
 
     public String getName() {
@@ -53,10 +59,24 @@ public class Teacher {
     /**
      * The teacher accepts requests from the stack or the queue
      */
-    public static void acceptRequests() {
+    public void acceptRequests() {
     }
 
-    public static void helpCurrentStudent() {
+    /**
+     * Decreases the time left on the current request by 1
+     * 
+     * @return a boolean representing whether the current student has fixed their error
+     */
+    public boolean helpCurrentStudent() {
+        // decrease the amount of time left on the student's error by 1 minute
+        currentRequest.getError().decrementTimeUntilFixed();
+
+        if (currentRequest.errorFixed()) {
+            currentRequest = null;
+            return true;
+        }
+
+        return false;
     }
 
     @Override

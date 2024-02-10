@@ -28,11 +28,14 @@ public class Error {
 
     // how many minutes it takes for the student to fix the error
     // if they receive help from the teacher
-    private int minutesToFixWithHelp;
+    private int fixTimeWithHelp;
 
     // how many minutes it takes for the student to fix the error
     // if they do not receive help from the teacher
-    private int minutesToFixWithoutHelp;
+    private int fixTimeWithoutHelp;
+
+    // how many minutes left until the error is resolved
+    private int timeUntilFixed;
 
     public Error() {
         this(ErrorType.UNDEFINED, 1, 1);
@@ -52,10 +55,12 @@ public class Error {
         this(ErrorType.toErrorType(errorStr), 1, 1);
     }
 
-    public Error(ErrorType error, int minutesToFixWithHelp, int minutesToFixWithoutHelp) {
+    public Error(ErrorType error, int fixTimeWithHelp, int fixTimeWithoutHelp) {
         this.error = error;
-        this.minutesToFixWithHelp = minutesToFixWithHelp;
-        this.minutesToFixWithoutHelp = minutesToFixWithoutHelp;
+        this.fixTimeWithHelp = fixTimeWithHelp;
+        this.fixTimeWithoutHelp = fixTimeWithoutHelp;
+
+        timeUntilFixed = fixTimeWithoutHelp;
     }
 
     /**
@@ -63,13 +68,13 @@ public class Error {
      * Defaults to UNDEFINED
      * 
      * @param errorStr                a String that holds the error
-     * @param minutesToFixWithHelp    how long it takes for the student to fix the error 
+     * @param fixTimeWithHelp    how long it takes for the student to fix the error 
      *                                if they receive help from the teacher
-     * @param minutesToFixWithoutHelp how long it takes for the student to fix the error 
+     * @param fixTimeWithoutHelp how long it takes for the student to fix the error 
      *                                if they do not receive help from the teacher
      */
-    public Error(String errorStr, int minutesToFixWithHelp, int minutesToFixWithoutHelp) {
-        this(ErrorType.toErrorType(errorStr), minutesToFixWithHelp, minutesToFixWithoutHelp);
+    public Error(String errorStr, int fixTimeWithHelp, int fixTimeWithoutHelp) {
+        this(ErrorType.toErrorType(errorStr), fixTimeWithHelp, fixTimeWithoutHelp);
     }
 
     public ErrorType getError() {
@@ -84,20 +89,32 @@ public class Error {
         this.error = ErrorType.toErrorType(errorStr);
     }
 
-    public int getMinutesToFixWithHelp() {
-        return minutesToFixWithHelp;
+    public int getFixTimeWithHelp() {
+        return fixTimeWithHelp;
     }
 
-    public void setMinutesToFixWithHelp(int minutes) {
-        minutesToFixWithHelp = minutes;
+    public void setFixTimeWithHelp(int minutes) {
+        fixTimeWithHelp = minutes;
     }
 
-    public int getMinutesToFixWithoutHelp() {
-        return minutesToFixWithoutHelp;
+    public int getFixTimeWithoutHelp() {
+        return fixTimeWithoutHelp;
     }
 
-    public void setMinutesToFixWithoutHelp(int minutes) {
-        minutesToFixWithoutHelp = minutes;
+    public void setFixTimeWithoutHelp(int minutes) {
+        fixTimeWithoutHelp = minutes;
+    }
+
+    public int getTimeUntilFixed() {
+        return timeUntilFixed;
+    }
+
+    public void decrementTimeUntilFixed() {
+        timeUntilFixed--;
+    }
+
+    public void decrementTimeUntilFixed(int minutes) {
+        timeUntilFixed -= minutes;
     }
 
     @Override

@@ -47,6 +47,15 @@ public class HelpRequest {
         this.error = new Error(error);
     }
 
+    /**
+     * Returns whether the student's error is fixed
+     * 
+     * @return a boolean representing whether the timeUntilFinished value of error is 0
+     */
+    public boolean errorFixed() {
+        return error.getTimeUntilFixed() == 0;
+    }
+
     public void setError(String errorStr) {
         this.error = new Error(errorStr);
     }

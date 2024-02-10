@@ -43,7 +43,7 @@ public class Demeanor {
      * @param demeanorStr a String that holds the demeanor
      */
     public Demeanor(String demeanorStr) {
-        setDemeanor(demeanorStr);
+        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
     }
 
     public DemeanorType getDemeanor() {

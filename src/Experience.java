@@ -27,15 +27,15 @@ public class Experience {
     private ExperienceLevel experience;
 
     public Experience() {
-        setExperience(ExperienceLevel.UNDEFINED);
+        this.experience = ExperienceLevel.UNDEFINED;
     }
 
     public Experience(String experienceStr) {
-        setExperience(experienceStr);
+        this.experience = ExperienceLevel.toExperienceLevel(experienceStr);
     }
 
     public Experience(ExperienceLevel experienceLevel) {
-        setExperience(experienceLevel);
+        this.experience = experienceLevel;
     }
 
     public ExperienceLevel getExperience() {

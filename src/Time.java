@@ -1,6 +1,10 @@
 import java.time.*;
+import java.time.format.*;
+import java.time.temporal.ChronoUnit;
 
-public class Time implements Comparable {
+public class Time implements Comparable<Time> {
+    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("H':'m");
+
     private LocalTime currentTime;
 
     public Time() {
@@ -65,19 +69,17 @@ public class Time implements Comparable {
      * @return a LocalTime object representing the given time
      */
     public static LocalTime parse(String timeStr) {
-        try {
-            java.time.format.DateTimeFormatter timeFormat = java.time.format.DateTimeFormatter.ofPattern("H':'m");
+        try {;
             return LocalTime.parse(timeStr, timeFormat);
 
-
-        } catch (java.time.format.DateTimeParseException e) { // if the given String is not a valid time
+        } catch (DateTimeParseException e) { // if the given String is not a valid time
             return null;
         }
     }
 
     @Override
     public String toString() {
-        return currentTime.toString();
+        return currentTime.format(timeFormat);
     }
 
     @Override
@@ -91,15 +93,9 @@ public class Time implements Comparable {
     }
 
     @Override
-    public int compareTo(Object obj) {
-        if (!(obj instanceof Time)) {
-            throw new IllegalArgumentException("Time object can only be compared to another Time object.");
-        }
-
-        Time time = (Time) obj;
-
+    public int compareTo(Time time) {
         // until() returns the amount of time from this LocalTime to another LocalTime,
         // so the value returned by until() has to be negated to return thisTime - otherTime
-        return (int) -this.currentTime.until(time.currentTime, java.time.temporal.ChronoUnit.MINUTES);
+        return -(int) (this.currentTime.until(time.currentTime, ChronoUnit.MINUTES));
     }
 }

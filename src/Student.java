@@ -7,23 +7,23 @@ public class Student {
     private static int studentID = 1;
 
     public Student() {
-        setName("Student" + studentID++);
-        setDemeanor(Demeanor.DemeanorType.UNDEFINED);
+        name = "Student" + studentID++;
+        demeanor = new Demeanor(Demeanor.DemeanorType.UNDEFINED);
     }
 
     public Student(String name, Demeanor demeanor) {
-        setName("Student");
-        setDemeanor(demeanor);
+        this.name = "Student";
+        demeanor = demeanor;
     }
 
     public Student(String name, Demeanor.DemeanorType demeanorType) {
-        setName("Student");
-        setDemeanor(demeanorType);
+        this.name = "Student";
+        demeanor = new Demeanor(demeanorType);
     }
 
     public Student(String name, String demeanorStr) {
         this.name = name;
-        setDemeanor(demeanorStr);
+        demeanor = new Demeanor(demeanorStr);
     }
 
     public String getName() {
