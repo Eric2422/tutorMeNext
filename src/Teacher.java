@@ -57,12 +57,27 @@ public class Teacher {
     }
 
     /**
-     * The teacher accepts requests from the stack or the queue
+     * The teacher accepts requests new into the stack or the queue
+     * Varies depending on the teachers level of experience
      */
     public void acceptRequests() {
-        // switch(experience) {
+        switch(experience.getExperience()) {
+            case Experience.ExperienceLevel.EXPERIENCED -> {
 
-        // }
+            }
+
+            case Experience.ExperienceLevel.INTERMEDIATE -> {
+
+            }
+
+            case Experience.ExperienceLevel.FIRST_YEAR -> {
+
+            }
+
+            case Experience.ExperienceLevel.UNDEFINED -> {
+                throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()")
+            }
+        }
     }
 
     /**
@@ -76,13 +91,18 @@ public class Teacher {
 
         // if the current student is done
         if (currentRequest.errorFixed()) {
-            // they leave and the teacher is free to help another student
+            // they leave and the teacher moves onto the next student
             currentRequest = null;
             return true;
         }
 
         return false;
     }
+
+    /**
+     * 
+     */
+    public boolean 
 
     @Override
     public String toString() {
