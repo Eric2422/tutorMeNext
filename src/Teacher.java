@@ -60,6 +60,9 @@ public class Teacher {
      * The teacher accepts requests from the stack or the queue
      */
     public void acceptRequests() {
+        // switch(experience) {
+
+        // }
     }
 
     /**
@@ -71,7 +74,9 @@ public class Teacher {
         // decrease the amount of time left on the student's error by 1 minute
         currentRequest.getError().decrementTimeUntilFixed();
 
+        // if the current student is done
         if (currentRequest.errorFixed()) {
+            // they leave and the teacher is free to help another student
             currentRequest = null;
             return true;
         }

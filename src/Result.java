@@ -2,11 +2,16 @@ import java.io.FileWriter;
 
 public class Result {
     // the number of students that the teacher helped
-    private int studentsHelped = 0;
+    private int studentsHelped;
 
     // the total of how long the students had to wait for help
     // in minutes
-    private int totalWaitTime = 0;
+    private int totalWaitTime;
+
+    public Result() {
+        studentsHelped = 0;
+        totalWaitTime = 0;
+    }
 
     public Result(int studentsHelped, int totalWaitTime) {
         this.studentsHelped = studentsHelped;

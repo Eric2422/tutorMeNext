@@ -3,9 +3,16 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Time time1 = new Time(3, 15);
-        Time time2 = new Time(3, 10);
+        ListQueue<Character> queue = new ListQueue<>();
 
-        System.out.println(time1);
+        String str = "Hello world!";
+
+        for (int i=0; i<str.length(); i++) {
+            queue.add(str.charAt(i));
+        }
+
+        for (int i=0; i<str.length(); i++) {
+            System.out.println(queue.remove());
+        }
     }
 }
