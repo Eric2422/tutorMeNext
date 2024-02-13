@@ -75,7 +75,7 @@ public class Teacher {
             }
 
             case Experience.ExperienceLevel.UNDEFINED -> {
-                throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()")
+                throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
             }
         }
     }
@@ -98,11 +98,6 @@ public class Teacher {
 
         return false;
     }
-
-    /**
-     * 
-     */
-    public boolean 
 
     @Override
     public String toString() {
