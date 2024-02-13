@@ -56,6 +56,20 @@ public class Teacher {
         this.experience = new Experience(experienceStr);
     }
 
+    public HelpRequest getCurrentRequest() {
+        return currentRequest;
+    }
+
+    /**
+     * Returns true if the teacher is not helping a student
+     * Returns false otherwise
+     * 
+     * @return whether currentRequest is null(i.e. the teacher is not helping any student)
+     */
+    public boolean isIdle() {
+        return currentRequest == null;
+    }
+
     /**
      * The teacher accepts requests new into the stack or the queue
      * Varies depending on the teachers level of experience
@@ -91,10 +105,37 @@ public class Teacher {
 
         // if the current student is done
         if (currentRequest.errorFixed()) {
-            // they leave and the teacher moves onto the next student
-            currentRequest = null;
+            // the current student leaves and the teacher moves on to the next student
+            moveOnToNextStudent();
             return true;
         }
+
+        return false;
+    }
+
+    /**
+     * Called after the teacher is done helping a student
+     * The teacher moves on to the next student that needs help
+     * Accepts HelpRequests from the requestsStack before requestsQueue
+     * 
+     * @return Whether the teacher successfully moved on to the next student
+     *         Returns false if there are no more students
+     */
+    public boolean moveOnToNextStudent() {
+        // Prioritize the stack over the queue
+         if (!requestsStack.isEmpty()) {
+            currentRequest = requestsStack.pop();
+            return true;
+        }
+
+        // If the stack is empty, process the queue
+        if (!requestsQueue.isEmpty()) {
+            currentRequest = requestsQueue.remove();
+            return true;
+        }
+
+        // If both are empty, there are no students to help
+        currentRequest = null;
 
         return false;
     }

@@ -5,8 +5,13 @@ public class ListQueue<T> extends LinkedList<T> {
         super();
     }
 
-    // @Override
-    // public T pop() {
-    //     return T;
-    // }
+    @Override
+    public T pop() {
+        throw new UnsupportedOperationException("ListQueue does not support pop().");
+    }
+
+    @Override
+    public void push(T t) {
+        throw new UnsupportedOperationException("ListQueue does not support push().");
+    }
 }
