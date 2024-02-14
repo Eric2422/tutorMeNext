@@ -13,45 +13,45 @@ public class Experience {
          */
         private static ExperienceLevel toExperienceLevel(String experienceStr) {
             // convert the String to the matching ExperienceLevel and store it
-            ExperienceLevel experience =  ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
+            ExperienceLevel experienceLevel =  ExperienceLevel.valueOf(experienceStr.trim().toUpperCase());
 
             // Can not be set to undefined
-            if (experience == ExperienceLevel.UNDEFINED) {
+            if (experienceLevel == ExperienceLevel.UNDEFINED) {
                 throw new IllegalArgumentException("\""  + experienceStr + "\" is not a valid experience.");
             }
 
-            return experience;
+            return experienceLevel;
         }
     }
 
-    private ExperienceLevel experience;
+    private ExperienceLevel experienceLevel;
 
     public Experience() {
-        this.experience = ExperienceLevel.UNDEFINED;
+        experienceLevel = ExperienceLevel.UNDEFINED;
     }
 
     public Experience(String experienceStr) {
-        this.experience = ExperienceLevel.toExperienceLevel(experienceStr);
+        experienceLevel = ExperienceLevel.toExperienceLevel(experienceStr);
     }
 
     public Experience(ExperienceLevel experienceLevel) {
-        this.experience = experienceLevel;
+        this.experienceLevel = experienceLevel;
     }
 
-    public ExperienceLevel getExperience() {
-        return experience;
+    public ExperienceLevel getExperienceLevel() {
+        return experienceLevel;
     }
 
-    public void setExperience(ExperienceLevel experienceLevel) {
-        this.experience = experienceLevel;
+    public void setExperienceLevel(ExperienceLevel experienceLevel) {
+        this.experienceLevel = experienceLevel;
     }
 
-    public void setExperience(Experience experience) {
-        this.experience = experience.experience;
+    public void setExperienceLevel(Experience experience) {
+        this.experienceLevel = experience.experienceLevel;
     }
 
-    public void setExperience(String experienceStr) {
-        this.experience = ExperienceLevel.toExperienceLevel(experienceStr);
+    public void setExperienceLevel(String experienceStr) {
+        this.experienceLevel = ExperienceLevel.toExperienceLevel(experienceStr);
     }
 
     @Override

@@ -12,28 +12,28 @@ public class Demeanor {
          */
         private static DemeanorType toDemeanorType(String demeanorStr) {
             // convert the String to the matching DemeanorType and store it
-            DemeanorType demeanor = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
+            DemeanorType demeanorType = DemeanorType.valueOf(demeanorStr.trim().toUpperCase());
 
             // Can not be set to undefined
-            if (demeanor == DemeanorType.UNDEFINED) {
+            if (demeanorType == DemeanorType.UNDEFINED) {
                 throw new IllegalArgumentException("\"" + demeanorStr + "\" is not a valid demeanor.");
             }
 
-            return demeanor;
+            return demeanorType;
         }
     }
 
-    private DemeanorType demeanor = DemeanorType.UNDEFINED; 
+    private DemeanorType demeanorType = DemeanorType.UNDEFINED; 
 
     public Demeanor() {
     }
 
     public Demeanor(DemeanorType demeanorType) {
-        this.demeanor = demeanorType;
+        this.demeanorType = demeanorType;
     }
 
     public Demeanor(Demeanor demeanor) {
-        this.demeanor = demeanor.demeanor;
+        this.demeanorType = demeanor.demeanorType;
     }
 
     /**
@@ -43,27 +43,27 @@ public class Demeanor {
      * @param demeanorStr a String that holds the demeanor
      */
     public Demeanor(String demeanorStr) {
-        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
+        this.demeanorType = DemeanorType.toDemeanorType(demeanorStr);
     }
 
-    public DemeanorType getDemeanor() {
-        return demeanor;
+    public DemeanorType getDemeanorType() {
+        return demeanorType;
     }
 
-    public void setDemeanor(DemeanorType demeanorType) {
-        this.demeanor = demeanorType;
+    public void setDemeanorType(DemeanorType demeanorType) {
+        this.demeanorType = demeanorType;
     }
 
-    public void setDemeanor(Demeanor demeanor) {
-        this.demeanor = demeanor.demeanor;
+    public void setDemeanorType(Demeanor demeanor) {
+        this.demeanorType = demeanor.demeanorType;
     }
 
-    public void setDemeanor(String demeanorStr) {
-        this.demeanor = DemeanorType.toDemeanorType(demeanorStr);
+    public void setDemeanorType(String demeanorStr) {
+        this.demeanorType = DemeanorType.toDemeanorType(demeanorStr);
     }
 
     @Override
     public String toString() {
-        return demeanor.toString();
+        return demeanorType.toString();
     }
 }

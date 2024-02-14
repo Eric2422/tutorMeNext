@@ -13,12 +13,17 @@ public class Teacher {
     // Is null when the teacher is not helping anyone
     private HelpRequest currentRequest;
 
+    // stores the HelpRequests that haven't been sorted into requestsStack or requestsQueue yet
+    private ListQueue<HelpRequest> incomingRequests;
+
     private ArrayStack<HelpRequest> requestsStack;
     private ListQueue<HelpRequest> requestsQueue;
 
     public Teacher() {
         name = "Teacher" + teacherID++;
         experience = new Experience(Experience.ExperienceLevel.FIRST_YEAR);
+
+        incomingRequests = new ListQueue<>();
 
         requestsStack = new ArrayStack<>();
         requestsQueue = new ListQueue<>();
@@ -27,6 +32,8 @@ public class Teacher {
     public Teacher(String name, Experience experience) {
         this.name = name;
         this.experience = experience;
+
+        incomingRequests = new ListQueue<>();
 
         requestsStack = new ArrayStack<>();
         requestsQueue = new ListQueue<>();
@@ -56,6 +63,15 @@ public class Teacher {
         this.experience = new Experience(experienceStr);
     }
 
+    /**
+     * Adds a new HelpRequest to incomingRequests
+     * 
+     * @param request a HelpRequest representing a student coming in for help
+     */
+    public void addIncomingRequest(HelpRequest request) {
+        incomingRequests.add(request);
+    }
+
     public HelpRequest getCurrentRequest() {
         return currentRequest;
     }
@@ -75,13 +91,15 @@ public class Teacher {
      * Varies depending on the teachers level of experience
      */
     public void acceptRequests() {
-        switch(experience.getExperience()) {
-            case Experience.ExperienceLevel.EXPERIENCED -> {
+        HelpRequest incomingStudent = incomingRequests.remove();
 
+        switch(experience.getExperienceLevel()) {
+            case Experience.ExperienceLevel.EXPERIENCED -> {
+                switch (incomingStudent.getDemeanor().getDemeanorType())
             }
 
             case Experience.ExperienceLevel.INTERMEDIATE -> {
-
+                requestsQueue.add(incomingStudent);
             }
 
             case Experience.ExperienceLevel.FIRST_YEAR -> {
