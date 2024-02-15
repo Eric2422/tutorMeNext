@@ -94,24 +94,31 @@ public class Teacher {
         HelpRequest incomingStudent = incomingRequests.remove();
 
         switch(experience.getExperienceLevel()) {
-            case Experience.ExperienceLevel.EXPERIENCED -> {
-                switch (incomingStudent.getDemeanor().getDemeanorType()) {
-                    case RUDE -> {
+            case EXPERIENCED  -> acceptRequestsExperienced(incomingStudent);
+            case INTERMEDIATE -> requestsQueue.add(incomingStudent);
+            case FIRST_YEAR   -> 
+            case UNDEFINED    -> throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
+        }
+    }
 
-                    }
-                }
-            }
-
-            case Experience.ExperienceLevel.INTERMEDIATE -> {
+    /**
+     * Helper method for accepting requests when the teacher is experienced
+     */
+    public void acceptRequestsExperienced(HelpRequest incomingStudent) {
+        switch (incomingStudent.getDemeanor().getDemeanorType()) {
+            case RUDE -> {
                 requestsQueue.add(incomingStudent);
             }
 
-            case Experience.ExperienceLevel.FIRST_YEAR -> {
-
+            case POLITE -> {
+                switch (incomingStudent.getError().getErrorType()) {
+                    case COMPILING, LINKING -> requestsStack.push(incomingStudent);
+                    case RUNTIME            -> requestsQueue.add(incomingStudent);
+                }
             }
 
-            case Experience.ExperienceLevel.UNDEFINED -> {
-                throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
+            case UNDEFINED -> {
+                throw new IllegalStateException("The `demeanor` property of a Student object must be set before it can be used.");
             }
         }
     }
