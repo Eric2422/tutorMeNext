@@ -1,5 +1,6 @@
 import java.util.Stack;
 import java.util.Queue;
+import java.util.Collection;
 
 public class Teacher { 
     // Used to differentiate different teachers instantiated with the no-param constructor
@@ -72,6 +73,15 @@ public class Teacher {
         incomingRequests.add(request);
     }
 
+    /**
+     * Adds one or more new HelpRequests to incomingRequests
+     * 
+     * @param requests a Collection of HelpRequests representing multiple students coming in for help
+     */
+    public void addIncomingRequests(Collection<HelpRequest> requests) {
+        incomingRequests.addAll(requests);
+    }
+
     public HelpRequest getCurrentRequest() {
         return currentRequest;
     }
@@ -96,13 +106,15 @@ public class Teacher {
         switch(experience.getExperienceLevel()) {
             case EXPERIENCED  -> acceptRequestsExperienced(incomingStudent);
             case INTERMEDIATE -> requestsQueue.add(incomingStudent);
-            case FIRST_YEAR   -> 
+            case FIRST_YEAR   -> acceptRequestsFirstYear(incomingStudent);
             case UNDEFINED    -> throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
         }
     }
 
     /**
      * Helper method for accepting requests when the teacher is experienced
+     * 
+     * @param incomingStudent the student that is being moved into the stack or queue
      */
     public void acceptRequestsExperienced(HelpRequest incomingStudent) {
         switch (incomingStudent.getDemeanor().getDemeanorType()) {
@@ -124,13 +136,26 @@ public class Teacher {
     }
 
     /**
+     * Helper method for accepting requests when the teacher is only FIRST_YEAR
+     * 
+     * @param incomingStudent the student that is being moved into the stack or queue
+     */
+    public void acceptRequestsFirstYear(HelpRequest incomingStudent) {
+        switch (incomingStudent.getDemeanor().getDemeanorType()) {
+            case RUDE -> requestsStack.push(incomingStudent);
+            case POLITE -> requestsQueue.add(incomingStudent);
+            case UNDEFINED -> throw new IllegalStateException("The `demeanor` property of a Student object must be set before it can be used.");
+        }
+    }
+
+    /**
      * Decreases the time left on the current request by 1
      * 
      * @return a boolean representing whether the current student has fixed their error
      */
     public boolean helpCurrentStudent() {
         // decrease the amount of time left on the student's error by 1 minute
-        currentRequest.getError().decrementTimeUntilFixed();
+        currentRequest.getError().decrementMinutesUntilFixed();
 
         // if the current student is done
         if (currentRequest.errorFixed()) {

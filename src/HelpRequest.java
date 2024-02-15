@@ -52,7 +52,7 @@ public class HelpRequest {
     }
 
     public int getMinutesWithoutHelp() {
-        return error.minutesWithoutHelp();
+        return error.getMinutesWithoutHelp();
     }
 
     public int getMinutesWithHelp() {
@@ -73,7 +73,7 @@ public class HelpRequest {
      * @return a boolean representing whether the timeUntilFinished value of error is 0
      */
     public boolean errorFixed() {
-        return error.getTimeUntilFixed() == 0;
+        return error.getMinutesUntilFixed() == 0;
     }
 
     public void setError(String errorStr) {
