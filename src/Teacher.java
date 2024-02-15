@@ -95,7 +95,11 @@ public class Teacher {
 
         switch(experience.getExperienceLevel()) {
             case Experience.ExperienceLevel.EXPERIENCED -> {
-                switch (incomingStudent.getDemeanor().getDemeanorType())
+                switch (incomingStudent.getDemeanor().getDemeanorType()) {
+                    case RUDE -> {
+
+                    }
+                }
             }
 
             case Experience.ExperienceLevel.INTERMEDIATE -> {

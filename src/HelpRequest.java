@@ -5,22 +5,30 @@ public class HelpRequest {
     private Error error;
 
     // the time that the request was made
-    private Time timeStamp;
+    private Time time;
 
     public HelpRequest() {
         this.student = new Student();
         this.error = new Error();
-        this.timeStamp = new Time();
+        this.time = new Time();
     }
 
-    public HelpRequest(Student student, Error error, Time timeStamp) {
+    public HelpRequest(Student student, Error error, Time time) {
         this.student = student;
         this.error = error;
-        this.timeStamp = timeStamp;
+        this.time = time;
     }
 
     public Student getStudent() {
         return student;
+    }
+
+    public String getName() {
+        return student.getName();
+    }
+
+    public Demeanor getDemeanor() {
+        return student.getDemeanor();
     }
 
     public void setStudent(Student student) {
@@ -35,8 +43,20 @@ public class HelpRequest {
         student = new Student(name, demeanorType);
     }
 
+    public void setDemeanor(Demeanor demeanor) {
+        student.setDemeanor(demeanor);
+    }
+
     public Error getError() { 
         return error;
+    }
+
+    public int getMinutesWithoutHelp() {
+        return error.minutesWithoutHelp();
+    }
+
+    public int getMinutesWithHelp() {
+        return error.getMinutesWithHelp();
     }
 
     public void setError(Error error) {
@@ -60,19 +80,19 @@ public class HelpRequest {
         this.error = new Error(errorStr);
     }
 
-    public Time getTimeStamp() {
-        return timeStamp;
+    public Time getTime() {
+        return time;
     }
 
-    public void setTimeStamp(int hour, int minute) {
-        this.timeStamp = new Time(hour, minute);
+    public void setTime(int hour, int minute) {
+        this.time = new Time(hour, minute);
     }
 
-    public void setTimeStamp(LocalTime localTime) {
-        this.timeStamp = new Time(localTime);
+    public void setTime(LocalTime localTime) {
+        this.time = new Time(localTime);
     }
 
-    public void setTimeStamp(Time time) {
-        this.timeStamp = time;
+    public void setTime(Time time) {
+        this.time = time;
     }
 }

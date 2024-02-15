@@ -37,10 +37,12 @@ public class Time implements Comparable<Time> {
     }
 
     /**
-     * Increments the time by 1 minute
+     * Returns a new Time that is one minute ahead of this one
+     * 
+     * @return a new Time object that is one minute ahead of this one
      */
-    public void incrementTime() {
-        setCurrentTime(currentTime.plusMinutes(1));
+    public Time nextMinute() {
+        return new Time(currentTime.plusMinutes(1));
     }
 
     public void incrementTime(int minutes) {
@@ -57,6 +59,10 @@ public class Time implements Comparable<Time> {
 
     public void setCurrentTime(Time time) {
         currentTime = time.currentTime;
+    }
+
+    public void setFromString(String timeStr) {
+        currentTime = parse(timeStr);
     }
 
     /**
