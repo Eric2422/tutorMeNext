@@ -17,8 +17,10 @@ public class Main {
     private static ListQueue readInputfile(String filePath) {
         ListQueue<HelpRequest> requestsQueue = new ListQueue<>();
 
-        BufferedReader reader = new BufferedReader(new FileReader(filePath));
-        reader.lines().forEach(i -> )
+        // read the file 
+        BufferedReader fileData = new BufferedReader(new FileReader(filePath));
+        
+        
     }
 
     public static void main(String[] args) {
