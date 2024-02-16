@@ -107,11 +107,11 @@ public class HelpRequest {
 
     @Override
     public String toString() {
-        String str = "Request:  \"" + name + "\", @ " + timeStamp
-		           + "\n\tDemeanor:  " + demeanor
+        String str = "Request:  \"" + student.getName() + "\", @ " + timeStamp
+		           + "\n\tDemeanor:  " + student.getDemeanor()
 		           + "\n\tError:  " + error
-		           + "\n\tMinutes with help:  " + minutesWithHelp
-		           + "\n\tMinutes without help:  " + minutesWithoutHelp;
+		           + "\n\tMinutes with help:  " + error.getMinutesWithHelp()
+		           + "\n\tMinutes without help:  " + error.getMinutesWithoutHelp();
 
 		return str;
     }

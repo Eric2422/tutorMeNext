@@ -1,14 +1,15 @@
-import java.util.Scanner;
 import java.io.*;
+import java.time.format.*;
+import java.util.Scanner;
 
 public class Main {
-	private static final Time EARLIEST_TIME = new Time (14, 15);
-	private static final Time LATEST_TIME = new Time (15, 30);
+    private static final Scanner input = new Scanner(System.in);
+    
+	private static final Time MIN_TIME = new Time (14, 15);
+	private static final Time MAX_TIME = new Time (15, 30);
 	private static final int PAUSE_LENGTH = 20;
 
     private static String getFileName() {
-        Scanner input = new Scanner(System.in);
-
         System.out.println("Enter the name of the input file: ");
         return input.nextLine();
     }
@@ -29,7 +30,7 @@ public class Main {
         while ((line=fileData.readLine()) != null) {
             HelpRequest helpRequest = new HelpRequest();
 
-            helpRequest.setTime(line);
+            helpRequest.setTimeStamp(line);
             helpRequest.setName(fileData.readLine());
             helpRequest.setError(fileData.readLine());
 
@@ -56,11 +57,10 @@ public class Main {
      * 
      * @return a Teacher object with its name and experiene set
      */
-    public static Teacher getTeacherInfo() {
-        Scanner input = new Scanner(System.in);
-
+    private static Teacher promptTeacherInfo() {
         Teacher teacher = new Teacher();
-        System.out.print("Enter teacher's name: ");
+
+        System.out.print("Enter the teacher's name: ");
         teacher.setName(input.nextLine());
 
         // keep asking for the teacher's experience until a valid input is given
@@ -82,8 +82,30 @@ public class Main {
         return teacher;
     }
 
-    public static Time getTime() {
-        
+    /**
+     * Ask the user to input a time
+     * It can not be before MIN_TIME or after MAX_TIME
+     */
+    private static Time promptTime() {
+        Time time = new Time();
+
+        // keep asking for a time until the user enters a valid one
+        do {
+            System.out.println("Enter a time from " + MIN_TIME + " to " + MAX_TIME);
+
+            try {
+                time = new Time(input.nextLine());
+
+            } catch (DateTimeParseException e) {
+            }
+
+        } while (time.isAfter(MAX_TIME) || time.isBefore(MIN_TIME));
+
+        return time;
+    }
+
+    private static void printEndReport(Teacher teacher) {
+        System.out.println(teacher);
     }
 
     public static void main(String[] args) {

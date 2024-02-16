@@ -32,6 +32,24 @@ public class Time implements Comparable<Time> {
         this.currentTime = time.currentTime;
     }
 
+    /**
+     * Convert a String into a Time based on a 24-hour format.
+     * Hours and minutes should be separated by a colon(:).
+     * Does not accept seconds.
+     * Returns null if it is not possible to convert the String
+     * 
+     * @param  timeStr a String that contains a time in 24-hour format
+     * @return a LocalTime object representing the given time
+     */
+    public static LocalTime parse(String timeStr) {
+        try {
+            return LocalTime.parse(timeStr, timeFormat);
+
+        } catch (DateTimeParseException e) { // if the given String is not a valid time
+            return null;
+        }
+    }
+
     public LocalTime getCurrentTime() {
         return currentTime;
     }
@@ -71,22 +89,12 @@ public class Time implements Comparable<Time> {
         currentTime = (time != null) ? time : currentTime;
     }
 
-    /**
-     * Convert a String into a Time based on a 24-hour format.
-     * Hours and minutes should be separated by a colon(:).
-     * Does not accept seconds.
-     * Returns null if it is not possible to convert the String
-     * 
-     * @param  timeStr a String that contains a time in 24-hour format
-     * @return a LocalTime object representing the given time
-     */
-    public static LocalTime parse(String timeStr) {
-        try {
-            return LocalTime.parse(timeStr, timeFormat);
+    public boolean isAfter(Time time) {
+        return currentTime.isAfter(time.currentTime);
+    }
 
-        } catch (DateTimeParseException e) { // if the given String is not a valid time
-            return null;
-        }
+    public boolean isBefore(Time time) {
+        return currentTime.isBefore(time.currentTime);
     }
 
     @Override
