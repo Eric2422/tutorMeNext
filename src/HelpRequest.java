@@ -104,4 +104,15 @@ public class HelpRequest {
     public void setTime(String timeStr) {
         time = new Time(timeStr);
     }
+
+    @Override
+    public String toString() {
+        String str = "Request:  \"" + request.getName() + "\", @ " + request.getTime()
+		           + "\n\tDemeanor:  " + request.getDemeanor()
+		           + "\n\tError:  " + request.getError()
+		           + "\n\tMinutes with help:  " + request.getMinutesWithHelp()
+		           + "\n\tMinutes without help:  " + request.getMinutesWithoutHelp();
+
+		return str;
+    }
 }

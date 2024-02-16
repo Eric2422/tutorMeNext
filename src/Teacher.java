@@ -196,6 +196,16 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return name + "\nExperience: "  + experience;
+        String str = 
+               "Teacher: " + name 
+             + "\nExperience: "  + experience 
+             + "\n\t\"" + teacher.getName () + "\""
+             + "\n\t" + teacher.getExperience()
+             + "\nCurrent " + currentRequest
+             + "\nTeacher " + requestsStack
+             + "\nTeacher " + requestsQueue;
+
+        return str;
+            
     }
 }
