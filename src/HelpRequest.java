@@ -43,6 +43,10 @@ public class HelpRequest {
         student = new Student(name, demeanorType);
     }
 
+    public void setName(String name) {
+        student.setName(name);
+    }
+
     public void setDemeanor(Demeanor demeanor) {
         student.setDemeanor(demeanor);
     }
@@ -67,6 +71,10 @@ public class HelpRequest {
         this.error = new Error(error);
     }
 
+    public void setError(String errorStr) {
+        this.error = new Error(errorStr);
+    }
+
     /**
      * Returns whether the student's error is fixed
      * 
@@ -76,9 +84,6 @@ public class HelpRequest {
         return error.getMinutesUntilFixed() == 0;
     }
 
-    public void setError(String errorStr) {
-        this.error = new Error(errorStr);
-    }
 
     public Time getTime() {
         return time;
@@ -94,5 +99,9 @@ public class HelpRequest {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public void setTime(String timeStr) {
+        time = new Time(timeStr);
     }
 }

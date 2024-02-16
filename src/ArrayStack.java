@@ -12,9 +12,28 @@ public class ArrayStack<T> extends ArrayList<T> {
     /**
      * Pops the last element of the ArrayStack
      * 
-     * @return the last element of the ArrayStack
+     * @return the last element of the ArrayStack or null if the ArrayStack is empty
      */
     public T pop() {
-        return remove(size() - 1);
+        try {   
+            return remove(size() - 1);
+
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
+    }
+
+    /**
+     * Peeks the last element of the ArrayStack without removing it
+     * 
+     * @return the last element of the ArrayStack or null if the ArrayStack is empty
+     */
+    public T peek() {
+        try {
+            return get(size() - 1);
+
+        } catch (IndexOutOfBoundsException e) {
+            return null;
+        }
     }
 }

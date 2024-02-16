@@ -61,8 +61,14 @@ public class Time implements Comparable<Time> {
         currentTime = time.currentTime;
     }
 
-    public void setFromString(String timeStr) {
-        currentTime = parse(timeStr);
+    /**
+     * Tries to set the currentTime based on a String
+     * currentTime remains unchanged if the String can not be parsed into a LocalTime
+     */
+    public void setCurrentTime(String timeStr) {
+        LocalTime time = parse(timeStr);
+
+        currentTime = (time != null) ? time : currentTime;
     }
 
     /**
@@ -75,7 +81,7 @@ public class Time implements Comparable<Time> {
      * @return a LocalTime object representing the given time
      */
     public static LocalTime parse(String timeStr) {
-        try {;
+        try {
             return LocalTime.parse(timeStr, timeFormat);
 
         } catch (DateTimeParseException e) { // if the given String is not a valid time
