@@ -5,18 +5,18 @@ public class HelpRequest {
     private Error error;
 
     // the time that the request was made
-    private Time time;
+    private Time timeStamp;
 
     public HelpRequest() {
         this.student = new Student();
         this.error = new Error();
-        this.time = new Time();
+        this.timeStamp = new Time();
     }
 
     public HelpRequest(Student student, Error error, Time time) {
         this.student = student;
         this.error = error;
-        this.time = time;
+        this.timeStamp = time;
     }
 
     public Student getStudent() {
@@ -85,33 +85,33 @@ public class HelpRequest {
     }
 
 
-    public Time getTime() {
-        return time;
+    public Time getTimeStamp() {
+        return timeStamp;
     }
 
-    public void setTime(int hour, int minute) {
-        this.time = new Time(hour, minute);
+    public void setTimeStamp(int hour, int minute) {
+        timeStamp = new Time(hour, minute);
     }
 
-    public void setTime(LocalTime localTime) {
-        this.time = new Time(localTime);
+    public void setTimeStamp(LocalTime localTime) {
+        timeStamp = new Time(localTime);
     }
 
-    public void setTime(Time time) {
-        this.time = time;
+    public void setTimeStamp(Time time) {
+        timeStamp = time;
     }
 
-    public void setTime(String timeStr) {
-        time = new Time(timeStr);
+    public void setTimeStamp(String timeStr) {
+        timeStamp = new Time(timeStr);
     }
 
     @Override
     public String toString() {
-        String str = "Request:  \"" + request.getName() + "\", @ " + request.getTime()
-		           + "\n\tDemeanor:  " + request.getDemeanor()
-		           + "\n\tError:  " + request.getError()
-		           + "\n\tMinutes with help:  " + request.getMinutesWithHelp()
-		           + "\n\tMinutes without help:  " + request.getMinutesWithoutHelp();
+        String str = "Request:  \"" + name + "\", @ " + timeStamp
+		           + "\n\tDemeanor:  " + demeanor
+		           + "\n\tError:  " + error
+		           + "\n\tMinutes with help:  " + minutesWithHelp
+		           + "\n\tMinutes without help:  " + minutesWithoutHelp;
 
 		return str;
     }

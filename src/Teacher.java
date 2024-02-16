@@ -198,9 +198,8 @@ public class Teacher {
     public String toString() {
         String str = 
                "Teacher: " + name 
-             + "\nExperience: "  + experience 
-             + "\n\t\"" + teacher.getName () + "\""
-             + "\n\t" + teacher.getExperience()
+             + "\n\t\"" + name + "\""
+             + "\n\t" + experience
              + "\nCurrent " + currentRequest
              + "\nTeacher " + requestsStack
              + "\nTeacher " + requestsQueue;

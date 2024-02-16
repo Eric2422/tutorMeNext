@@ -82,7 +82,9 @@ public class Main {
         return teacher;
     }
 
-    
+    public static Time getTime() {
+        
+    }
 
     public static void main(String[] args) {
 
