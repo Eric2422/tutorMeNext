@@ -14,4 +14,15 @@ public class ListQueue<T> extends LinkedList<T> {
     public void push(T t) {
         throw new UnsupportedOperationException("ListQueue does not support push().");
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        for (T ele : this) {
+            str += ele.toString() + "\n";
+        }
+
+        return str;
+    }
 }

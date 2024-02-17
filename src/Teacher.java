@@ -15,7 +15,7 @@ public class Teacher {
     private HelpRequest currentRequest;
 
     // stores the HelpRequests that haven't been sorted into requestsStack or requestsQueue yet
-    private ListQueue<HelpRequest> incomingRequests;
+    private ListQueue<HelpRequest> pendingRequests;
 
     private ArrayStack<HelpRequest> requestsStack;
     private ListQueue<HelpRequest> requestsQueue;
@@ -24,7 +24,7 @@ public class Teacher {
         name = "Teacher" + teacherID++;
         experience = new Experience(Experience.ExperienceLevel.FIRST_YEAR);
 
-        incomingRequests = new ListQueue<>();
+        pendingRequests = new ListQueue<>();
 
         requestsStack = new ArrayStack<>();
         requestsQueue = new ListQueue<>();
@@ -34,7 +34,7 @@ public class Teacher {
         this.name = name;
         this.experience = experience;
 
-        incomingRequests = new ListQueue<>();
+        pendingRequests = new ListQueue<>();
 
         requestsStack = new ArrayStack<>();
         requestsQueue = new ListQueue<>();
@@ -65,21 +65,21 @@ public class Teacher {
     }
 
     /**
-     * Adds a new HelpRequest to incomingRequests
+     * Adds a new HelpRequest to pendingRequests
      * 
      * @param request a HelpRequest representing a student coming in for help
      */
     public void addIncomingRequest(HelpRequest request) {
-        incomingRequests.add(request);
+        pendingRequests.add(request);
     }
 
     /**
-     * Adds one or more new HelpRequests to incomingRequests
+     * Adds one or more new HelpRequests to pendingRequests
      * 
      * @param requests a Collection of HelpRequests representing multiple students coming in for help
      */
-    public void addIncomingRequests(Collection<HelpRequest> requests) {
-        incomingRequests.addAll(requests);
+    public void addpendingRequests(Collection<HelpRequest> requests) {
+        pendingRequests.addAll(requests);
     }
 
     public HelpRequest getCurrentRequest() {
@@ -99,9 +99,16 @@ public class Teacher {
     /**
      * The teacher accepts requests new into the stack or the queue
      * Varies depending on the teachers level of experience
+     * 
+     * @return if a new student was accepted. If it returns false, then there are no students waiting to be accepted
      */
-    public void acceptRequests() {
-        HelpRequest incomingStudent = incomingRequests.remove();
+    public boolean acceptRequests() {
+        HelpRequest incomingStudent = pendingRequests.remove();
+
+        // if incomingStudent is null, then there are no pending requests
+        if (incomingStudent == null) {
+            return false;
+        }
 
         switch(experience.getExperienceLevel()) {
             case EXPERIENCED  -> acceptRequestsExperienced(incomingStudent);
@@ -109,6 +116,8 @@ public class Teacher {
             case FIRST_YEAR   -> acceptRequestsFirstYear(incomingStudent);
             case UNDEFINED    -> throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
         }
+
+        return true;
     }
 
     /**
@@ -197,14 +206,13 @@ public class Teacher {
     @Override
     public String toString() {
         String str = 
-               "Teacher: " + name 
+               "Teacher: " 
              + "\n\t\"" + name + "\""
              + "\n\t" + experience
-             + "\nCurrent " + currentRequest
-             + "\nTeacher " + requestsStack
-             + "\nTeacher " + requestsQueue;
+             + "\nCurrent Request: " + currentRequest
+             + "\nTeacher Request Stack:\n" + requestsStack
+             + "\nTeacher Request Queue:\n" + requestsQueue;
 
         return str;
-            
     }
 }

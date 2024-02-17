@@ -36,4 +36,15 @@ public class ArrayStack<T> extends ArrayList<T> {
             return null;
         }
     }
+
+    @Override
+    public String toString() {
+        String str = "";
+
+        for (T ele : this) {
+            str += ele.toString() + "\n";
+        }
+
+        return str;
+    }
 }

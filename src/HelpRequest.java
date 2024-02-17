@@ -51,6 +51,10 @@ public class HelpRequest {
         student.setDemeanor(demeanor);
     }
 
+    public void setDemeanor(String demeanorStr) {
+        student.setDemeanor(demeanorStr);
+    }
+
     public Error getError() { 
         return error;
     }

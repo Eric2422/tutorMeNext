@@ -63,6 +63,18 @@ public class Time implements Comparable<Time> {
         return new Time(currentTime.plusMinutes(1));
     }
 
+    /**
+     * Increases the currentTime by one minute
+     */
+    public void incrementTime() {
+        setCurrentTime(currentTime.plusMinutes(1));
+    }
+
+    /**
+     * Increase the currentTime by a given number of minutes
+     * 
+     * @param minutes how many minutes to advance forward
+     */
     public void incrementTime(int minutes) {
         setCurrentTime(currentTime.plusMinutes(minutes));
     }

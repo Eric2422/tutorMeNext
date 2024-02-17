@@ -48,6 +48,8 @@ public class Result {
 
     @Override
     public String toString() {
-        return "Number of Students Helped: " + studentsHelped + "\nTotal Wait Time: " + totalWaitTime;
+        return "Number of Students Helped: " + studentsHelped
+             + "\nTotal Wait Time: " + totalWaitTime
+             + "\nAverage Wait Time: " + getMeanWaitTime();
     }
 }

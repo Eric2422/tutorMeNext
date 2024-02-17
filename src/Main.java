@@ -7,11 +7,11 @@ public class Main {
     
 	private static final Time MIN_TIME = new Time (14, 15);
 	private static final Time MAX_TIME = new Time (15, 30);
-	private static final int PAUSE_LENGTH = 20;
 
-    private static String getFileName() {
-        System.out.println("Enter the name of the input file: ");
-        return input.nextLine();
+    private static void printGreeting() {
+        System.out.println("Hello, welcome to Tutor Me Next.");
+        System.out.println("In case you haven't read the README.md,");
+        System.out.println("this is a simulation of a computer science teacher helping students with their errors after school.");
     }
 
     /**
@@ -19,34 +19,66 @@ public class Main {
      * 
      * @return a ListQueue of HelpRequests objects with all properties set
      */
-    private static ListQueue<HelpRequest> readInputfile(String filePath) throws IOException {
+    private static ListQueue<HelpRequest> readInputFile() {
+        // keep prompting the user to choose a file until the user enters an existing file
+        String filePath;
+        BufferedReader fileData;
+        do {
+            System.out.println("Enter the name of the input file. Exclude the directory(i.e. \"../input/\"): ");
+            filePath = input.nextLine();
+
+            try {
+                // extract the data from the input file
+                fileData = new BufferedReader(new FileReader("../input/" + filePath));
+                break;
+
+            } catch (FileNotFoundException e) {
+                System.out.println();
+                System.out.println("The file " + filePath + " does not exist.");
+                System.out.println();
+            }
+        } while (true);
+        
         ListQueue<HelpRequest> requestsQueue = new ListQueue<>();
-        
-        // extract the data from the input file
-        BufferedReader fileData = new BufferedReader(new FileReader(filePath));
-        
-        // checks whether the end of the file has been reached
+
+        System.out.println();
+        System.out.println("Reading input from " + filePath + "...");
+
+        // while the end of the file has not been 
         String line;
-        while ((line=fileData.readLine()) != null) {
-            HelpRequest helpRequest = new HelpRequest();
+        try {
+            while ((line = fileData.readLine()) != null) {
+                HelpRequest helpRequest = new HelpRequest();
+    
+                helpRequest.setTimeStamp(line);
+                helpRequest.setName(fileData.readLine());
+                helpRequest.setDemeanor(fileData.readLine());
+                helpRequest.setError(fileData.readLine());
+    
+                // convert the Strings into ints before storing them
+                helpRequest.getError().setMinutesWithHelp(
+                    Integer.parseInt(fileData.readLine())
+                );
+                helpRequest.getError().setMinutesWithoutHelp(
+                    Integer.parseInt(fileData.readLine())
+                );
+    
+                // since the student is by default not being helped,
+                // set minuntesUntilFixed to minutesWithoutHelp
+                helpRequest.getError().setMinutesUntilFixed(helpRequest.getError().getMinutesWithoutHelp());
+    
+                requestsQueue.add(helpRequest);
+            }
 
-            helpRequest.setTimeStamp(line);
-            helpRequest.setName(fileData.readLine());
-            helpRequest.setError(fileData.readLine());
+            fileData.close();
 
-            // convert the String into an int before saving it
-            helpRequest.getError().setMinutesWithHelp(
-                Integer.parseInt(fileData.readLine())
-            );
-            helpRequest.getError().setMinutesWithoutHelp(
-                Integer.parseInt(fileData.readLine())
-            );
-            // since the student is by default not being helped,
-            // set minuntesUntilFixed to minutesWithoutHelp
-            helpRequest.getError().setMinutesUntilFixed(helpRequest.getError().getMinutesWithoutHelp());
-
-            requestsQueue.add(helpRequest);
+        } catch (IOException e) {
+            System.out.println("An error has occurred while reading the input file. Check that there are no errors in the format.");
+            e.printStackTrace();
+            System.exit(1);
         }
+
+        System.out.println("Finished reading input from " + filePath);
 
         return requestsQueue;
     }
@@ -85,18 +117,22 @@ public class Main {
     /**
      * Ask the user to input a time
      * It can not be before MIN_TIME or after MAX_TIME
+     * 
+     * @param prompt the prompt that is printed out
      */
-    private static Time promptTime() {
+    private static Time promptTime(String prompt) {
         Time time = new Time();
 
         // keep asking for a time until the user enters a valid one
         do {
-            System.out.println("Enter a time from " + MIN_TIME + " to " + MAX_TIME);
+            System.out.print(prompt);
 
             try {
                 time = new Time(input.nextLine());
 
             } catch (DateTimeParseException e) {
+                System.out.println();
+                System.out.println("Invalid time. Try again");
             }
 
         } while (time.isAfter(MAX_TIME) || time.isBefore(MIN_TIME));
@@ -104,11 +140,90 @@ public class Main {
         return time;
     }
 
-    private static void printEndReport(Teacher teacher) {
-        System.out.println(teacher);
+    private static Time promptTime() {
+        return promptTime("Enter a time from " + MIN_TIME + " to " + MAX_TIME + ": ");
+    }
+
+    /** 
+     * 
+     * @param teacher the teacher object that is going to be used in the simulation
+     */
+    private static void printHeader(FileWriter outputFile, Teacher teacher) {
+        try {
+            outputFile.write(teacher.toString());
+
+            outputFile.append("\n\nSimulation Run\n");
+            outputFile.append("==============\n");
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the output file(output/output.txt).");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    } 
+
+
+    /**
+     * Prints out the final report after the simulation is done running
+     * 
+     * @param teacher the teacher object that was used in the simulatoin
+     */
+    private static void printEndReport(FileWriter outputFile, Teacher teacher, Result result) {
+        try {
+            // print out the teacher's information
+            outputFile.append("\n\n");
+            outputFile.append("Teacher At End\n");
+            outputFile.append("==============");
+            outputFile.append(teacher.toString());
+
+            outputFile.append("\n\n");
+            outputFile.append("Simulation summary:\n");
+            outputFile.append("==================\n");
+            outputFile.append(result.toString());
+
+            outputFile.close();
+
+        } catch (IOException e) {
+            System.out.println("An error occurred while writing to the output file(../output/output.txt).");
+            e.printStackTrace();
+            System.exit(1);
+        }
+    }
+
+    /**
+     * Recursively runs through each minute until end time
+     */
+    private static void runSimulation() {
+
     }
 
     public static void main(String[] args) {
+        FileWriter outputFile;
+        try {
+            outputFile = new FileWriter("../output/output.txt");
 
+        } catch (IOException e) {
+            System.out.println("\nThe file output.txt either can't be created or can't be editted. Check your permissions.");
+            e.printStackTrace();
+            return;
+        }
+
+        printGreeting();
+        System.out.println();
+
+        ListQueue<HelpRequest> helpRequests = readInputFile();
+        Teacher teacher = new Teacher();
+
+        System.out.println();
+
+        Time startTime = promptTime("Enter the start time(" + MIN_TIME + "-" + MAX_TIME + "): ");
+        System.out.println();
+        Time endTime = promptTime("Enter the end time(" + MIN_TIME + "-" + MAX_TIME + "): ");
+        
+        Result result = new Result();
+
+        printHeader(outputFile, teacher);
+
+        printEndReport(outputFile, teacher, result);
     }
 }
