@@ -80,6 +80,13 @@ public class HelpRequest {
     }
 
     /**
+     * Sets minutesUntilFixed to minutesWithHelp
+     */
+    public void getsHelp() {
+        error.setMinutesUntilFixed(error.getMinutesWithHelp());
+    }
+
+    /**
      * Returns whether the student's error is fixed
      * 
      * @return a boolean representing whether the timeUntilFinished value of error is 0
@@ -87,7 +94,6 @@ public class HelpRequest {
     public boolean errorFixed() {
         return error.getMinutesUntilFixed() == 0;
     }
-
 
     public Time getTimeStamp() {
         return timeStamp;
@@ -115,7 +121,8 @@ public class HelpRequest {
 		           + "\n\tDemeanor:  " + student.getDemeanor()
 		           + "\n\tError:  " + error
 		           + "\n\tMinutes with help:  " + error.getMinutesWithHelp()
-		           + "\n\tMinutes without help:  " + error.getMinutesWithoutHelp();
+		           + "\n\tMinutes without help:  " + error.getMinutesWithoutHelp()
+                   + "\n\tMinutes until fixed:  " + error.getMinutesUntilFixed();
 
 		return str;
     }

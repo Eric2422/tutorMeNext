@@ -1,5 +1,4 @@
-import java.util.Stack;
-import java.util.Queue;
+import java.util.ArrayList;
 import java.util.Collection;
 
 public class Teacher { 
@@ -10,7 +9,7 @@ public class Teacher {
     private String name;
     private Experience experience;
 
-    // the student that the teacher is currenlty working with
+    // the student that the teacher is currently working with
     // Is null when the teacher is not helping anyone
     private HelpRequest currentRequest;
 
@@ -69,7 +68,7 @@ public class Teacher {
      * 
      * @param request a HelpRequest representing a student coming in for help
      */
-    public void addIncomingRequest(HelpRequest request) {
+    public void addPendingRequest(HelpRequest request) {
         pendingRequests.add(request);
     }
 
@@ -78,12 +77,16 @@ public class Teacher {
      * 
      * @param requests a Collection of HelpRequests representing multiple students coming in for help
      */
-    public void addpendingRequests(Collection<HelpRequest> requests) {
+    public void addPendingRequests(Collection<HelpRequest> requests) {
         pendingRequests.addAll(requests);
     }
 
     public HelpRequest getCurrentRequest() {
         return currentRequest;
+    }
+
+    public int getNumberOfWaitingStudents() {
+        return requestsQueue.size() + requestsStack.size();
     }
 
     /**
@@ -97,27 +100,43 @@ public class Teacher {
     }
 
     /**
+     * Returns if there are any students in requestsStack or requestsQueue
+     */
+    public boolean hasWaitingStudents() {
+        return !requestsStack.isEmpty() || !requestsQueue.isEmpty();
+    }
+
+    /**
+     * Whether there are any requests that the teacher can accept
+     */
+    public boolean hasRequestsToAccept(Time currentTime) {
+        return pendingRequests.size() != 0 && !pendingRequests.peek().getTimeStamp().isAfter(currentTime);
+    }
+
+    /**
      * The teacher accepts requests new into the stack or the queue
      * Varies depending on the teachers level of experience
      * 
-     * @return if a new student was accepted. If it returns false, then there are no students waiting to be accepted
+     * @param  currentTime the currentTime of the simulation. Used to determine which requests the teacher can accept
+     * @return ArrayList containg the HelpRequests that are accepted
      */
-    public boolean acceptRequests() {
-        HelpRequest incomingStudent = pendingRequests.remove();
+    public ArrayList<HelpRequest> acceptRequests(Time currentTime) {
+        ArrayList<HelpRequest> acceptedRequests = new ArrayList<>();
 
-        // if incomingStudent is null, then there are no pending requests
-        if (incomingStudent == null) {
-            return false;
-        }
+        // loop through pendingRequests and find all the requests that have arrived
+        while (hasRequestsToAccept(currentTime)) {
+            HelpRequest incomingStudent = pendingRequests.remove();
+            acceptedRequests.add(incomingStudent);
 
-        switch(experience.getExperienceLevel()) {
-            case EXPERIENCED  -> acceptRequestsExperienced(incomingStudent);
-            case INTERMEDIATE -> requestsQueue.add(incomingStudent);
-            case FIRST_YEAR   -> acceptRequestsFirstYear(incomingStudent);
-            case UNDEFINED    -> throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
-        }
+            switch(experience.getExperienceLevel()) {
+                case EXPERIENCED  -> acceptRequestsExperienced(incomingStudent);
+                case INTERMEDIATE -> requestsQueue.add(incomingStudent);
+                case FIRST_YEAR   -> acceptRequestsFirstYear(incomingStudent);
+                case UNDEFINED    -> throw new IllegalStateException("The `experience` property of a Teacher object must be set before calling acceptRequests()");
+            }
+        }   
 
-        return true;
+        return acceptedRequests;
     }
 
     /**
@@ -168,8 +187,6 @@ public class Teacher {
 
         // if the current student is done
         if (currentRequest.errorFixed()) {
-            // the current student leaves and the teacher moves on to the next student
-            moveOnToNextStudent();
             return true;
         }
 
@@ -184,23 +201,22 @@ public class Teacher {
      * @return Whether the teacher successfully moved on to the next student
      *         Returns false if there are no more students
      */
-    public boolean moveOnToNextStudent() {
+    public HelpRequestSource moveOnToNextStudent() {
         // Prioritize the stack over the queue
          if (!requestsStack.isEmpty()) {
             currentRequest = requestsStack.pop();
-            return true;
+            return HelpRequestSource.STACK;
         }
 
         // If the stack is empty, process the queue
         if (!requestsQueue.isEmpty()) {
             currentRequest = requestsQueue.remove();
-            return true;
+            return HelpRequestSource.QUEUE;
         }
 
         // If both are empty, there are no students to help
         currentRequest = null;
-
-        return false;
+        return HelpRequestSource.UNDEFINED;
     }
 
     @Override
@@ -209,8 +225,8 @@ public class Teacher {
                "Teacher: " 
              + "\n\t\"" + name + "\""
              + "\n\t" + experience
-             + "\nCurrent Request: " + currentRequest
-             + "\nTeacher Request Stack:\n" + requestsStack
+             + "\nCurrent Request: \n" + currentRequest
+             + "\n\nTeacher Request Stack:\n" + requestsStack
              + "\nTeacher Request Queue:\n" + requestsQueue;
 
         return str;

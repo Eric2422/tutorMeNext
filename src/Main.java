@@ -3,7 +3,7 @@ import java.time.format.*;
 import java.util.Scanner;
 
 public class Main {
-    private static final Scanner input = new Scanner(System.in);
+    private static final Scanner INPUT = new Scanner(System.in);
     
 	private static final Time MIN_TIME = new Time (14, 15);
 	private static final Time MAX_TIME = new Time (15, 30);
@@ -25,7 +25,7 @@ public class Main {
         BufferedReader fileData;
         do {
             System.out.println("Enter the name of the input file. Exclude the directory(i.e. \"../input/\"): ");
-            filePath = input.nextLine();
+            filePath = INPUT.nextLine();
 
             try {
                 // extract the data from the input file
@@ -93,14 +93,14 @@ public class Main {
         Teacher teacher = new Teacher();
 
         System.out.print("Enter the teacher's name: ");
-        teacher.setName(input.nextLine());
+        teacher.setName(INPUT.nextLine());
 
         // keep asking for the teacher's experience until a valid input is given
         do {
             System.out.print("Enter the teacher's level of experience(\"First Year\", \"Intermediate\", \"Experienced\"): ");
 
             try {
-                teacher.setExperience(input.nextLine());
+                teacher.setExperience(INPUT.nextLine());
                 break;
 
             } catch (IllegalArgumentException e) {
@@ -128,7 +128,7 @@ public class Main {
             System.out.print(prompt);
 
             try {
-                time = new Time(input.nextLine());
+                time = new Time(INPUT.nextLine());
 
             } catch (DateTimeParseException e) {
                 System.out.println();
@@ -150,7 +150,7 @@ public class Main {
      */
     private static void printHeader(FileWriter outputFile, Teacher teacher) {
         try {
-            outputFile.write(teacher.toString());
+            outputFile.append(teacher.toString());
 
             outputFile.append("\n\nSimulation Run\n");
             outputFile.append("==============\n");
@@ -162,7 +162,6 @@ public class Main {
         }
     } 
 
-
     /**
      * Prints out the final report after the simulation is done running
      * 
@@ -171,13 +170,13 @@ public class Main {
     private static void printEndReport(FileWriter outputFile, Teacher teacher, Result result) {
         try {
             // print out the teacher's information
-            outputFile.append("\n\n");
+            outputFile.append("\n");
             outputFile.append("Teacher At End\n");
-            outputFile.append("==============");
+            outputFile.append("==============\n");
             outputFile.append(teacher.toString());
 
             outputFile.append("\n\n");
-            outputFile.append("Simulation summary:\n");
+            outputFile.append("Simulation summary\n");
             outputFile.append("==================\n");
             outputFile.append(result.toString());
 
@@ -188,13 +187,6 @@ public class Main {
             e.printStackTrace();
             System.exit(1);
         }
-    }
-
-    /**
-     * Recursively runs through each minute until end time
-     */
-    private static void runSimulation() {
-
     }
 
     public static void main(String[] args) {
@@ -211,19 +203,31 @@ public class Main {
         printGreeting();
         System.out.println();
 
-        ListQueue<HelpRequest> helpRequests = readInputFile();
-        Teacher teacher = new Teacher();
+        ListQueue<HelpRequest> pendingRequests = readInputFile();
+        System.out.println();
 
+        Teacher teacher = promptTeacherInfo();
+        teacher.addPendingRequests(pendingRequests);
         System.out.println();
 
         Time startTime = promptTime("Enter the start time(" + MIN_TIME + "-" + MAX_TIME + "): ");
-        System.out.println();
         Time endTime = promptTime("Enter the end time(" + MIN_TIME + "-" + MAX_TIME + "): ");
-        
-        Result result = new Result();
 
         printHeader(outputFile, teacher);
 
-        printEndReport(outputFile, teacher, result);
+        Simulation simulation = new Simulation(teacher, startTime, endTime);
+
+        try {
+            while (!simulation.getFinished()) {
+                outputFile.append(simulation.runOneMinute());
+            }
+
+        } catch (IOException e) {
+            System.out.println("\nThe file output.txt either can't be created or can't be editted. Check your permissions.");
+            e.printStackTrace();
+            return;
+        }
+
+        printEndReport(outputFile, teacher, simulation.getSimulationResult());
     }
 }

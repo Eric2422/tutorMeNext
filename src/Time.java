@@ -3,7 +3,7 @@ import java.time.format.*;
 import java.time.temporal.ChronoUnit;
 
 public class Time implements Comparable<Time> {
-    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("H':'m");
+    private static final DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("H':'mm");
 
     private LocalTime currentTime;
 
@@ -52,15 +52,6 @@ public class Time implements Comparable<Time> {
 
     public LocalTime getCurrentTime() {
         return currentTime;
-    }
-
-    /**
-     * Returns a new Time that is one minute ahead of this one
-     * 
-     * @return a new Time object that is one minute ahead of this one
-     */
-    public Time nextMinute() {
-        return new Time(currentTime.plusMinutes(1));
     }
 
     /**
